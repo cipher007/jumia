@@ -7,6 +7,10 @@ import com.jumia.exercise.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -44,14 +48,25 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 * @return list of customers exist in DB
 	 */
+	@Override
 	public List<Customer> findAllCustomers() {
 		return customerRepository.findAll();
+	}
+	
+	@Override
+	public Page<Customer> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return customerRepository.findAll(pageable);
 	}
 
 	/**
 	 * Find specific customer by id in DB
 	 * @return the customer found in DB for given ID
 	 */
+	@Override
 	public Customer findById(Integer id) throws EntityNotFoundException {
 		Customer customer = customerRepository.findById(id).orElse(null);
 		if (customer == null) {
@@ -68,6 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return a success message if created successfully or failed message if the
 	 *         customer already exists in DB
 	 */
+	@Override
 	@Transactional
 	public Customer createCustomer(Customer customer) throws Exception {
 
@@ -88,6 +104,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return a success message if customer updated successfully or failed message
 	 *         if the customer does not exist
 	 */
+	@Override
 	@Transactional
 	public String updateCustomer(Customer customer) {
 		if (customerRepository.existsByPhone(customer.getPhone())) {
@@ -117,6 +134,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return a success message if deleted successfully or failed message if the
 	 *         customer does not exist
 	 */
+	@Override
 	@Transactional
 	public String deleteCustomer(Customer customer) {
 		if (customerRepository.existsByPhone(customer.getPhone())) {

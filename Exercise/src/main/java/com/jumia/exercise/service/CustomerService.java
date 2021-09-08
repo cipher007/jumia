@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.data.domain.Page;
+
 import com.jumia.exercise.entity.Customer;
 
 /**
@@ -23,4 +25,6 @@ public interface CustomerService {
 	String updateCustomer(Customer customer);
 
 	String deleteCustomer(Customer customer);
+	
+	Page<Customer> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }
