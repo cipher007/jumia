@@ -3,7 +3,8 @@
 # Build Docker Image 
 1. open command line terminal
 2. Go to /Exercise/target/ to locate "jumia-exercise.jar" image.
-3. type down in command prompt: 
+3. type down in command prompt:
+
 $ docker build -t jumia-exercise.jar . 
 
 # Check Docker Image 
