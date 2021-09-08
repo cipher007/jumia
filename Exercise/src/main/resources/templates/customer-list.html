@@ -31,7 +31,7 @@
 		<!-- /.container-fluid -->
 		<!-- container -->
 		<div class="container">
-			<form th:action="@{/}">
+			<form th:action="@{/filtered}">
 				<label for="country">Country</label>
 				<input type="text" name="country" id="country" size="40" th:value="${country}" /> &nbsp; 
 				<label for="status">Status</label>
@@ -71,6 +71,28 @@
 				</tbody>
 				<!-- /.table body -->
 			</table>
+			<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-12" align="center">
+				<div class = "col-sm-2">
+					Total Records: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-8">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/customers/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/customers/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/customers/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+   				 </div>
+			</div>
+		</div>
 			<!-- /.table -->
 		</div>
 		<!-- /.Main content -->
