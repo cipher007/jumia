@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    project-app:
+      build: ./
+      image: jumia-exercise:1.0
+      restart: always
+      container_name: jumia-exercise
+      ports:
+        - 9090:8080
+      volumes: 
+        - /var/run/docker.sock:/var/run/docker.sock
+      network_mode: bridge

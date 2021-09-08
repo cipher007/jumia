@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Customers List</title>
+
+<!-- bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+<!-- css styles file -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- container-fluid -->
+		<div class="container-fluid" align="center">
+			<h1 th:text="${title}"></h1>
+		</div>
+		<!-- /.container-fluid -->
+		<!-- container -->
+		<div class="container">
+			<form th:action="@{/}">
+				<label for="country">Country</label>
+				<input type="text" name="country" id="country" size="40" th:value="${country}" /> &nbsp; 
+				<label for="status">Status</label>
+				<input type="text" name="status" id="status" size="40" th:value="${status}" /> &nbsp;
+				<input type="submit" value="Search" class="btn btn-primary" /> &nbsp; 
+				<input type="button" class="btn btn-secondary" value="Clear" id="btnClear" onclick="clearSearch()" />
+			</form>
+		</div>
+		<!-- /.container -->
+		<br /> <br />
+		<!-- Main content -->
+		<div class="card-body table-responsive p-3">
+			<!-- table -->
+			<table class="table" id="phone-table">
+				<!-- table head -->
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Country</th>
+						<th>Country Code</th>
+						<th>Phone</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<!-- /.table head -->
+				<!-- table body -->
+				<tbody>
+					<tr th:each="customer : ${customers}">
+						<td th:text="${customer.id}">...</td>
+						<td th:text="${customer.name}">...</td>
+						<td th:text="${customer.country}"></td>
+						<td th:text="${customer.code}"></td>
+						<td th:text="${customer.phone}">...</td>
+						<td align="center" th:text="${customer.status}" th:class="@{${customer.status} == 'VALID' ? 'bg-success' : 'bg-danger'}"></td>
+					</tr>
+				</tbody>
+				<!-- /.table body -->
+			</table>
+			<!-- /.table -->
+		</div>
+		<!-- /.Main content -->
+	</div>
+	<!-- /.content-wrapper -->
+	<!-- Javascript to reset filters -->
+	<script type="text/javascript">
+		function clearSearch() {
+			window.location = "[[@{/}]]";
+		}
+	</script>
+	<!-- /.Javascript -->
+</body>
+</html>
