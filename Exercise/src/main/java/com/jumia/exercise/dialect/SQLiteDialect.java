@@ -12,7 +12,7 @@ import java.sql.Types;
  * 
  * @author Hany
  *
- * Dialect for SQLite
+ *         Dialect for SQLite
  */
 public class SQLiteDialect extends Dialect {
 
@@ -138,5 +138,10 @@ public class SQLiteDialect extends Dialect {
 
 	public boolean supportsCascadeDelete() {
 		return false;
+	}
+
+	@Override
+	public boolean bindLimitParametersInReverseOrder() {
+		return true;
 	}
 }
