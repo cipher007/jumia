@@ -15,6 +15,7 @@ $ docker image ls
 # Run Docker Image 
 Change directory to "/jumia-master/Exercise/target/" to locate "jumia-exercise.jar" image.
 
+Enter command:
 $ docker run -p 9090:8080 jumia-exercise.jar
 
 In the run command, I have specified that the port 8080 on the container should be mapped to the port 9090 on the Host OS.
