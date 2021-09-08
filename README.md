@@ -3,7 +3,7 @@
 # Build Docker Image 
 1. open command line terminal.
 2. After extracting zip file, navigate to extracted exercise directory "/jumia-master/Exercise"
-3. type command "$ mvn clean install", make sure that maven is installed and configured.
+3. type command "$ mvn clean install", #NOTE: make sure that maven is installed and configured.
 4. Expected to receive [INFO] BUILD SUCCESS message.
 5. type down the follwoing build command in command prompt:
 
