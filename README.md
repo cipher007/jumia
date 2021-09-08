@@ -4,7 +4,7 @@
 1. open command line terminal
 2. Go to /Exercise/target/ to locate "jumia-exercise.jar" image.
 3. type down: 
-$ docker build -t jumia-exercise.jar .
+$ docker build -t jumia-exercise.jar . 
 
 # Check Docker Image 
 $ docker image ls
