@@ -1,9 +1,11 @@
 # Jumia Service Exercise project
 
 # Build Docker Image 
-1. open command line terminal
-2. Go to /Exercise/target/ to locate "jumia-exercise.jar" image.
-3. type down in command prompt:
+1. open command line terminal.
+2. After extracting zip file, navigate to extracted exercise directory "/jumia-master/Exercise"
+3. type command "$ mvn clean install", make sure that maven is installed and configured.
+4. Expected to receive [INFO] BUILD SUCCESS message.
+5. type down the follwoing build command in command prompt:
 
 $ docker build -t jumia-exercise.jar . 
 
@@ -11,6 +13,7 @@ $ docker build -t jumia-exercise.jar .
 $ docker image ls
 
 # Run Docker Image 
+Change directory to "/jumia-master/Exercise/target/" to locate "jumia-exercise.jar" image.
 $ docker run -p 9090:8080 jumia-exercise.jar
 
 In the run command, I have specified that the port 8080 on the container should be mapped to the port 9090 on the Host OS.
